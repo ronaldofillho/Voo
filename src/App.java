@@ -15,7 +15,7 @@ public class App {
         Aeronave aeronave = new Aeronave("BOING-777", 162);
         Voo voo = new Voo("LATAM-1710", "Embarque", "JPA", "BSB", "15:00", "18:00", aeronave);
 
-        // Solicitar informações do passageiro
+    
         System.out.println("Digite o nome do passageiro:");
         String nomePassageiro = scanner.nextLine();
 
@@ -32,7 +32,7 @@ public class App {
         Notificacao notificacao = notificacaoFactory.criarNotificacao(tipoNotificacaoEnum.toString());
         Passageiro passageiro = new Passageiro(nomePassageiro, tipoNotificacaoEnum);
 
-        // Simular vender um assento
+       
         try {
             if (aeronave.venderAssento()) {
                 System.out.println("Assento vendido com sucesso!");
@@ -41,7 +41,7 @@ public class App {
             System.out.println(e.getMessage());
         }
 
-        // Contagem regressiva de 10 segundos antes de solicitar novamente as informações
+        
         for (int i = 5; i > 0; i--) {
             System.out.println("Contagem regressiva: " + i + " segundos...");
             try {
@@ -51,20 +51,20 @@ public class App {
             }
         }
 
-        // Exibir opções de tipos de status
+        
         System.out.println("Escolha o tipo de status:");
         for (TipoStatus tipo : TipoStatus.values()) {
             System.out.printf("%d - %s\n", tipo.getNumero(), tipo.name());
         }
 
-        // Solicitar ao usuário escolher um tipo de status
+        
         System.out.print("Digite o número correspondente ao tipo de status desejado: ");
         int escolhaTipoStatus = scanner.nextInt();
         scanner.nextLine(); // Limpar o buffer do scanner
 
-        // Se houver um atraso, permitir que o usuário atualize as informações de partida e chegada
+       
         if (escolhaTipoStatus == TipoStatus.ATRASADO.getNumero()) {
-            // Se houver um atraso, permitir que o usuário atualize as informações de partida e chegada
+            
             System.out.println("Digite a nova hora de partida (HH:mm):");
             String novaPartida = scanner.nextLine();
             voo.setHoraPartida(novaPartida);
@@ -73,15 +73,15 @@ public class App {
             String novaChegada = scanner.nextLine();
             voo.setHoraChegada(novaChegada);
         
-            // Solicitar novamente informações sobre a notificação e o status do voo
+            
             System.out.println("Escolha a nova forma de notificação (Email, SMS, PushNotification):");
             tipoNotificacaoStr = scanner.nextLine();
         
-            // Converter a string para um valor do enum
+           
             tipoNotificacaoEnum = TipoNotificacao.valueOf(tipoNotificacaoStr);
         }
 
-        // Exibir informações do voo no final
+        
         System.out.println("\nInformações do Voo:");
         
         System.out.println("Código do Voo: " + voo.getCodigo());
@@ -90,11 +90,11 @@ public class App {
         System.out.println("Horário de Partida: " + voo.getHoraPartida());
         System.out.println("Horário de Chegada: " + voo.getHoraChegada());
         
-        // Exibir o tipo de notificação
+        
         System.out.println("Tipo de Notificação: " + tipoNotificacaoEnum);
         System.out.println("Status do Voo: " + TipoStatus.values()[escolhaTipoStatus - 1].toString());
 
-        // Fechar o scanner
+        
         scanner.close();
     }
 }
