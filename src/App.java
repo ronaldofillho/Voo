@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 import Enum.TipoNotificacao;
+import Enum.TipoStatus;
 import Modelo.Aeronave;
 import Modelo.Passageiro;
 import Modelo.Voo;
@@ -12,7 +13,7 @@ public class App {
         Scanner scanner = new Scanner(System.in);
 
         Aeronave aeronave = new Aeronave("BOING-777", 162);
-        Voo voo = new Voo("LATAM-1710", "Atrasado", "JPA", "BSB", "15:00", "18:00", aeronave);
+        Voo voo = new Voo("LATAM-1710", "Embarque", "JPA", "BSB", "15:00", "18:00", aeronave);
 
         // Solicitar informações do passageiro
         System.out.println("Digite o nome do passageiro:");
@@ -50,23 +51,32 @@ public class App {
             }
         }
 
-        System.out.printf("Digite o novo status do voo: \nSe estiver 'Atrasado', digite 'atrasado':\n");
-        String statusVoo = scanner.nextLine();
+        // Exibir opções de tipos de status
+        System.out.println("Escolha o tipo de status:");
+        for (TipoStatus tipo : TipoStatus.values()) {
+            System.out.printf("%d - %s\n", tipo.getNumero(), tipo.name());
+        }
+
+        // Solicitar ao usuário escolher um tipo de status
+        System.out.print("Digite o número correspondente ao tipo de status desejado: ");
+        int escolhaTipoStatus = scanner.nextInt();
+        scanner.nextLine(); // Limpar o buffer do scanner
 
         // Se houver um atraso, permitir que o usuário atualize as informações de partida e chegada
-        if (statusVoo.toLowerCase().equals("atrasado")) {
+        if (escolhaTipoStatus == TipoStatus.ATRASADO.getNumero()) {
+            // Se houver um atraso, permitir que o usuário atualize as informações de partida e chegada
             System.out.println("Digite a nova hora de partida (HH:mm):");
             String novaPartida = scanner.nextLine();
             voo.setHoraPartida(novaPartida);
-
+        
             System.out.println("Digite a nova hora de chegada (HH:mm):");
             String novaChegada = scanner.nextLine();
             voo.setHoraChegada(novaChegada);
-
+        
             // Solicitar novamente informações sobre a notificação e o status do voo
             System.out.println("Escolha a nova forma de notificação (Email, SMS, PushNotification):");
             tipoNotificacaoStr = scanner.nextLine();
-
+        
             // Converter a string para um valor do enum
             tipoNotificacaoEnum = TipoNotificacao.valueOf(tipoNotificacaoStr);
         }
@@ -82,7 +92,7 @@ public class App {
         
         // Exibir o tipo de notificação
         System.out.println("Tipo de Notificação: " + tipoNotificacaoEnum);
-        System.out.println("Status do Voo: " + statusVoo);
+        System.out.println("Status do Voo: " + TipoStatus.values()[escolhaTipoStatus - 1].toString());
 
         // Fechar o scanner
         scanner.close();
