@@ -24,10 +24,8 @@ public class App {
         System.out.println("Escolha o tipo de notificação (Email, SMS, PushNotification):");
         String tipoNotificacaoStr = scanner.nextLine();
 
-        // Converter a string para um valor do enum
         TipoNotificacao tipoNotificacaoEnum = TipoNotificacao.valueOf(tipoNotificacaoStr);
 
-        // Criar objeto Passageiro usando o padrão Factory
         NotificacaoFactory notificacaoFactory = new NotificacaoFactory();
         Notificacao notificacao = notificacaoFactory.criarNotificacao(tipoNotificacaoEnum.toString());
         Passageiro passageiro = new Passageiro(nomePassageiro, tipoNotificacaoEnum);
