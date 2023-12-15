@@ -75,12 +75,10 @@ public class App {
             String novaChegada = scanner.nextLine();
             voo.setHoraChegada(novaChegada);
 
-
             System.out.println("Escolha a nova forma de notificação (Email, SMS, PushNotification):");
             tipoNotificacaoStr = scanner.nextLine();
-
-
             tipoNotificacaoEnum = TipoNotificacao.valueOf(tipoNotificacaoStr);
+            passageiro.update(tipoNotificacaoEnum.toString());
         }
 
 
