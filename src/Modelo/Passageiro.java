@@ -19,6 +19,10 @@ public class Passageiro implements Observer {
         this.notificacao = notificacao;
     }
 
+    public void setTipoNotificacao(TipoNotificacao tipoNotificacao) {
+        this.notificacao = notificacaoFactory.criarNotificacao(tipoNotificacao.toString());
+    }
+
 
 
     @Override
